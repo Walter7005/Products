@@ -1,0 +1,7 @@
+{
+  "name": "ablankApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

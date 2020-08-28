@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tiendita de los Herrores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- 
+  
+    la estructurita de abajo si la saco de comentarios funciona 
+    fabricar una web de esta manera se llama hardcoind,
+    con ngfor hacemos que la escructurita pasee por todo el array del json que 
+    hemos definido en el ts export class .. private products. 
+    en el fonto es otra manera de hardcoding (todo el sitio de compras estaria 
+    dentro del teléfono del usuario), 
+    los datos luego tienen que estar alojados en otro lugar
+
+   <ion-list>
+   <ion-item>
+     <ion-label>Nombre fijo</ion-label>
+     <ion-avatar>
+       <img [src]="" slot="start" />
+     </ion-avatar>
+     <ion-label color="danger">1500</ion-label> 
+   </ion-item>
+
+ 
+  -->
+    <ion-list>  
+      <ion-item *ngFor="let prod of products" [routerLink]="['/home', prod.id]">
+         <ion-avatar>
+          <img [src]="prod.imagen"/>
+        </ion-avatar>
+        <ion-label>{{prod.nombre}}</ion-label> 
+        <ion-label color ="danger"> {{prod.precio}}</ion-label>
+        
+        <ion-label *ngIf="prod.cantidad==0" color ="danger">SIN STOCK</ion-label>
+        <ion-label *ngIf="prod.cantidad>0" color ="primary">ME LO SACAN DE LAS MANOS</ion-label>
+        
+      </ion-item>
+    </ion-list> <!-- OJO con los cierres-->
+ 
+ <!-- borro  
+<ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+</ion-list>
+  <div id="container">
+    <strong>Ready to create an app?</strong>
+    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  </div>
+  -->
+</ion-content>
