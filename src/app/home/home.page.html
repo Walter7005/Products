@@ -3,6 +3,11 @@
     <ion-title>
       Tiendita de los Herrores
     </ion-title>
+    <ion-avatar slot="end">
+      <ion-badge color="danger" mode="ios">{{cantidadMyCesta}}</ion-badge> 
+      <!-- la variable cantidadCesta hay que definirla en home.page.ts-->
+      <img src="../../assets/Carrito dummy.png" />
+    </ion-avatar>
   </ion-toolbar>
 </ion-header>
 
@@ -37,11 +42,25 @@
         <ion-label color ="danger"> {{prod.precio}}</ion-label>
         
         <ion-label *ngIf="prod.cantidad==0" color ="danger">SIN STOCK</ion-label>
-        <ion-label *ngIf="prod.cantidad>0" color ="primary">ME LO SACAN DE LAS MANOS</ion-label>
-        
+        <ion-label *ngIf="prod.cantidad>0" color ="primary">Stock: {{prod.cantidad}} </ion-label>
       </ion-item>
     </ion-list> <!-- OJO con los cierres-->
- 
+    
+    <ion-text color="danger">
+      <h3>ABAJO EL CARRITO: {{cantidadMyCesta}}</h3>
+    </ion-text>
+   
+ <ion-list>  
+  <ion-item *ngFor="let cesta of myCesta">
+    <ion-avatar>
+      <img [src]="cesta.imagen"/>
+    </ion-avatar>
+    <ion-label>{{cesta.nombre}}</ion-label> 
+    <ion-label *ngIf="cesta.precio>0"color ="danger"> {{cesta.precio}}</ion-label>
+    <ion-label *ngIf="cesta.cantidad>0" color ="primary">Cantidad: {{cesta.cantidad}} </ion-label>
+  </ion-item>
+</ion-list> <!-- OJO con los cierres-->
+
  <!-- borro  
 <ion-header collapse="condense">
     <ion-toolbar>

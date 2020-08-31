@@ -1,12 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Producto</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
+    <!-- 29 AGO, en el ion-title a continuación 
+      sustituimos un texto haradcoded 'Producto' 
+      por un mapeo de un solo camino {{product.nombre}} 
+      OJO que el profe usa producto -->
+      <ion-title>La tiendita de los Herrores </ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-avatar slot="end">
+        <ion-badge color="danger" mode="ios">{{cantidadMyCesta}}</ion-badge> 
+        <!-- la variable cantidadCesta hay que definirla en home.page.ts-->
+        <img src="../../assets/Carrito dummy.png" />
+      </ion-avatar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-avatar position="stacked">
+      <img [src]="product.imagen"/>
+    </ion-avatar>
+    <ion-text color="primary">
+      <h1>Ficha de producto - {{product.nombre}}</h1>
+    </ion-text>  
+  </ion-item>
 
+  <ion-text color="secondary">
+      <h3>Especificaciones:</h3>
+  </ion-text>
+  
+    - Nunca taxi ni patrullero<br>
+    - No pasa de moda<br>
+    - No tiene comparación en el mercado.<br><br>
+    Tiene un precio de risa. Por sólo {{product.precio}} se lo lleva. <br><br>
+    
+   
+    <ion-text *ngIf="product.cantidad==0" color ="danger"> 
+      <h3>TOO LATE MY FRIEND - SIN STOCK</h3>
+    </ion-text>
+     
+  <ion-button *ngIf="product.cantidad>0"(click)="listaSrv.agregaaCesta(product)" expand="block" shape="round" >
+    Agregar a la cesta
+  </ion-button>
+
+ <!-- tarea, 
+  1. dejarlo bonito para presentar la información usando label
+  jugar con los emementos que conocemos 
+  2. poner un botón para agregar a la cesta
+ -->
 </ion-content>
