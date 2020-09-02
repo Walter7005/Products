@@ -29,12 +29,14 @@ export class ListaCompraService {
     }  // utilizamos let y no var porque var es una variable global
 
   public agregaaCesta(prod: Producto) {
+    // todo esto porque me da error que el array no tiene valores
     let loPopeo = new Producto();
     loPopeo = this.cestaDeLaCompra.pop();
-        if (loPopeo.cantidad > 0) {
+    if (loPopeo.cantidad > 0) {
       this.cestaDeLaCompra.push(loPopeo);  
-        }
+    }
     let elProducto = new Producto();
+    prod.cantidad--;
     elProducto.id = prod.id;
     elProducto.nombre = prod.nombre;
     elProducto.precio = prod.precio;

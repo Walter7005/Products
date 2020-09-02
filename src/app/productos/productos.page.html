@@ -35,6 +35,9 @@
     - No tiene comparación en el mercado.<br><br>
     Tiene un precio de risa. Por sólo {{product.precio}} se lo lleva. <br><br>
     
+    <ion-text *ngIf="product.cantidad>0" color ="danger"> 
+      <h3>UNIDADES EN STOCK: {{product.cantidad}}</h3>
+    </ion-text>
    
     <ion-text *ngIf="product.cantidad==0" color ="danger"> 
       <h3>TOO LATE MY FRIEND - SIN STOCK</h3>
