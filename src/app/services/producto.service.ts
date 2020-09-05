@@ -66,6 +66,14 @@ export class ProductoService {
      
   
 }]
+
+  public cestaDeLaCompra: Array<Producto> = [];
+  // opcion B ... public cestaDeLaCompra: Array<CarritoProductos> = [];
+    // 200902.3
+    // Profe lo pone public para no tener que crear un método
+    // con los corchetes la pasamos vacía
+    // hay que volver a productos.page.TS
+  
   constructor() { }
 
   public obtenerTodos() {
@@ -80,4 +88,11 @@ export class ProductoService {
     }  // utilizamos let y no var porque var es una variable global
   }
   
+  public getPrecioTotal() :number {
+    let sumaDePrecios= 0;
+    for (let cesta of this.cestaDeLaCompra) {
+      sumaDePrecios = sumaDePrecios + cesta.precio;
+    }
+    return sumaDePrecios;
+    }  // utilizamos let y no var porque var es una variable global
 }

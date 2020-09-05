@@ -9,22 +9,35 @@
         <ion-back-button defaultHref="/home"></ion-back-button>
       </ion-buttons>
       <ion-avatar slot="end">
-        <ion-badge color="danger" mode="ios">{{cantidadMyCesta}}</ion-badge> 
+        <ion-badge class="posicionCarrito" color="danger" mode="ios">{{cantidadMyCesta}}</ion-badge> 
         <!-- la variable cantidadCesta hay que definirla en home.page.ts-->
-        <img src="../../assets/Carrito dummy.png" />
+        <img class="imagenPLanta" src="../../assets/Carrito dummy.png" />
       </ion-avatar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- tarea para el 02SEP, 
+  1. dejarlo bonito para presentar la información usando label
+  jugar con los emementos que conocemos 
+  2. poner un botón para agregar a la cesta
+ -->
   <ion-item>
-    <ion-avatar position="stacked">
+    <!--200902.1 Profe sugiere poner la imagen en otro renglón por una cuestion de estilo
+      modifico sobre lo mio
+      <ion-avatar position="stacked">
       <img [src]="product.imagen"/>
     </ion-avatar>
+    continua abajo modificacion 02092.1-->
     <ion-text color="primary">
       <h1>Ficha de producto - {{product.nombre}}</h1>
     </ion-text>  
   </ion-item>
+  <!--- continua modificacion 02092.1-->
+  <ion-item>
+    <ion-img class="tamañoImg" [src]="product.imagen"></ion-img>
+  </ion-item>
+  <!--- FIN modificacion 02092.1-->
 
   <ion-text color="secondary">
       <h3>Especificaciones:</h3>
@@ -35,6 +48,13 @@
     - No tiene comparación en el mercado.<br><br>
     Tiene un precio de risa. Por sólo {{product.precio}} se lo lleva. <br><br>
     
+    <!--200902.2 Profe sugiere poner la cantidad de otra forma 
+            (con un input para usarla al pasar el dato a la compra)
+       y que el botón de agregar a cesta se le quite el enable en lugar de sustituirlo por una leyenda
+       agregar una cosita linda de la tarjeta de crédito
+       
+      modifico sobre lo mio
+
     <ion-text *ngIf="product.cantidad>0" color ="danger"> 
       <h3>UNIDADES EN STOCK: {{product.cantidad}}</h3>
     </ion-text>
@@ -46,10 +66,31 @@
   <ion-button *ngIf="product.cantidad>0"(click)="listaSrv.agregaaCesta(product)" expand="block" shape="round" >
     Agregar a la cesta
   </ion-button>
+  continua abajo lo que  sustituye modificacion 02092.2-->
 
- <!-- tarea, 
-  1. dejarlo bonito para presentar la información usando label
-  jugar con los emementos que conocemos 
-  2. poner un botón para agregar a la cesta
- -->
+  <ion-item>
+    <ion-label>Cantidad:</ion-label>
+    <ion-input type="number" placeholder="({{product.cantidad}} disponibles)"></ion-input>
+  </ion-item>
+  
+  <ion-item color="success"> 
+    <!-- para que queden en verde los elementos contenidos en el item en lugar del item 
+    hay que poner el coloe en cada elemento y quitarlo de allí arriba -->
+    <ion-icon name="card" slot="start"></ion-icon> <!-- mas iconos en ionicons.com-->
+    <ion-label>Paga en 3 cuotas sin intereses</ion-label>
+  </ion-item>
+
+<!--200902.3 Ademas de los temas de formato de disabled
+      para que se actualice mejor el contenido del carrito
+      para que quede todo mas prolijo resolvió el problema de la cesta de otra manera
+      en lugar de crear otro servicio define un public agregarCarrito() en productos.page.ts
+      en mi código mantengo el nombre agregaaCesta() de cabezón que soy
+-->
+  <ion-button (click)="agregaaCesta()" expand="block" shape="round" [disabled]="product.cantidad==0">
+    <ion-icon slot="start" name="cart"></ion-icon>
+    Agregar a la cesta
+  </ion-button>
+
+
+
 </ion-content>

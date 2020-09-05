@@ -1,6 +1,6 @@
 import { Component, OnInit, ɵCompiler_compileModuleAsync__POST_R3__ } from '@angular/core';
 import { ProductoService } from '../services/producto.service';
-import { ListaCompraService } from '../services/lista-compra.service';
+import { Producto } from '../model/producto';
 
 @Component({
   selector: 'app-home',
@@ -17,17 +17,17 @@ export class HomePage {
                         export class ProductoService {
                         private productos:Array<Producto> = <sigue .....> 
                     */
-  private cantidadMyCesta = 0; // esto es la cantidad de cosas en la cesta
-  private myCesta;
-  // al constructor le vamos a inyectar la dependencia private prodSrv:ProductoService
-  // lo tenemos que hacer en las dos páginas home.page.ts y productos.page.ts
-  constructor(private prodSrv: ProductoService, private listaSrv: ListaCompraService) { }
+  private cestaDeLaCompra: Array<Producto> = [];
+  
+  constructor(private prodSrv: ProductoService) { }
   
   ngOnInit() {
-    this.cantidadMyCesta = this.listaSrv.pasaCantidadCesta();
     // lo primero que hacemos es invocar el métdodo de obtenerTodos
     this.products = this.prodSrv.obtenerTodos();
-    this.myCesta = this.listaSrv.pasaTodalaLista();
+    // me traigo el carrito que está guardado dentro de nuestro servicio     
+    // y piso en el constructor
+    this.cestaDeLaCompra = this.prodSrv.cestaDeLaCompra;
+    
   }       
   
   /** 29AGO ejemplo para agregar un item a la lista de productos
@@ -46,4 +46,10 @@ export class HomePage {
     this.productos = prodSrv.obtenerTodos();
   }
   */
+ 
+  public sumaPrecios(): void {
+    let pagar = this.prodSrv.getPrecioTotal();
+   alert("Precio total a pagar es: $ " + pagar);
+  }
+
 }

@@ -4,9 +4,10 @@
       Tiendita de los Herrores
     </ion-title>
     <ion-avatar slot="end">
-      <ion-badge color="danger" mode="ios">{{cantidadMyCesta}}</ion-badge> 
+      <ion-badge class="posicionCarrito" color="danger">{{cestaDeLaCompra.length}}</ion-badge> 
       <!-- la variable cantidadCesta hay que definirla en home.page.ts-->
-      <img src="../../assets/Carrito dummy.png" />
+      <img (click)="sumaPrecios()" src="../../assets/Carrito dummy.png" /> 
+      <!-- es mejor ajustar height en estilo pero acá se puede hacer facil, no -->
     </ion-avatar>
   </ion-toolbar>
 </ion-header>
