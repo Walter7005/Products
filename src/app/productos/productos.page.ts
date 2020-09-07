@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { ProductoService } from '../services/producto.service';
+import { Producto } from '../model/producto';
 // import { ListaCompraService } from '../services/lista-compra.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { ProductoService } from '../services/producto.service';
 })
 export class ProductosPage implements OnInit {
 
-  private product;
+  private product = new Producto(); // esto hay que inicializarlo porque hay mucho código asincrónico
+
   // private lista;
   //  private cantidadMyCesta: number; esto es la cantidad de cosas en la cesta
 
@@ -27,10 +29,14 @@ export class ProductosPage implements OnInit {
   ngOnInit() {
     this.unObjetodeActiveteRoute.paramMap.subscribe(
       paramMap => {
-        this.product = this.prodSrv.obtenerPorID(paramMap.get("id"));         
+        this.prodSrv.obtenerPorID(paramMap.get("id"))
+          .subscribe(datos => {
+          this.product = datos;
+        });         
       // esta parte de la del código es asíncrono, y se puede ejecutar en cualquier momento
       // solo se ejecuta en cuanto resuelve la suscripcion
       // paramap es un objeto observador dentro del objeto ActivetedRoute 
+        // como a partir de 2020SEP05 hay dos suscribe encadenados es necesario inicializar 
       // OTRA COSA: presiona control antes de pasar con el ratón te amplia ayudas
       });
   }

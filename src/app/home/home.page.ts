@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵCompiler_compileModuleAsync__POST_R3__ } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductoService } from '../services/producto.service';
 import { Producto } from '../model/producto';
 
@@ -23,7 +23,10 @@ export class HomePage {
   
   ngOnInit() {
     // lo primero que hacemos es invocar el métdodo de obtenerTodos
-    this.products = this.prodSrv.obtenerTodos();
+    // eliminado el 2020SEP05 ... this.products = this.prodSrv.obtenerTodos();
+    this.prodSrv.obtenerTodos().subscribe(datos => {
+      this.products = datos;
+    });
     // me traigo el carrito que está guardado dentro de nuestro servicio     
     // y piso en el constructor
     this.cestaDeLaCompra = this.prodSrv.cestaDeLaCompra;

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../model/producto';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
+
+  /** inicio de lo eliminado el 20200905
   private products:Array<Producto> = [{
     /** 29-08 
         Primero que nada hemos creado un servicio que aloje la lógica 
@@ -33,7 +36,7 @@ export class ProductoService {
                   esto ayuda a que cuando carguemos datos nos salte el error
                 si ponemos un numero donde va un string, etc
                 luego podemos sumar cantidades o concatenar textos sin miedo
-    */
+    
                 
    // 22-08 ponemos un identificador id igual que en access
     
@@ -65,7 +68,8 @@ export class ProductoService {
       "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Televisio3DPhilips_mirrored.png/180px-Televisio3DPhilips_mirrored.png"
      
   
-}]
+    }]
+    lo eliminado el 20200905  */
 
   public cestaDeLaCompra: Array<Producto> = [];
   // opcion B ... public cestaDeLaCompra: Array<CarritoProductos> = [];
@@ -74,19 +78,23 @@ export class ProductoService {
     // con los corchetes la pasamos vacía
     // hay que volver a productos.page.TS
   
-  constructor() { }
+  constructor(private httpClient:HttpClient) { }
 
   public obtenerTodos() {
-    return this.products; // fijate la coincidencia
+    return this.httpClient.get<Producto[]>("http://localhost:3000/productos"); // fijate la coincidencia
   }
   
   public obtenerPorID(id: string) {
-    for (let prod of this.products) {
-      if (prod.id == id) {
-        return prod;
-      }
+    return this.httpClient.get<Producto>("http://localhost:3000/productos/" + id);
+    /** eliminado el 2020SEP05 
+     * for (let prod of this.products) {
+     * if (prod.id == id) {
+     *   return prod;
+     * } */
+    
+    
     }  // utilizamos let y no var porque var es una variable global
-  }
+
   
   public getPrecioTotal() :number {
     let sumaDePrecios= 0;

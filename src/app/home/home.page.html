@@ -44,8 +44,23 @@
         
         <ion-label *ngIf="prod.cantidad==0" color ="danger">SIN STOCK</ion-label>
         <ion-label *ngIf="prod.cantidad>0" color ="primary">Stock: {{prod.cantidad}} </ion-label>
+        <ion-button (click)="editarItem()" expand="block" fill="solid" shape="round">
+          Editar
+        </ion-button>
+        <ion-button (click)="borrarItem()" expand="block" fill="solid" color="danger" shape="round">
+          Borrar
+        </ion-button>
       </ion-item>
-    </ion-list> <!-- OJO con los cierres-->
+      <ion-item>
+        <ion-input type="text" placeholder="Awesome Input"></ion-input>
+        <ion-input type="text" placeholder="Awesome Input"></ion-input>
+        <ion-input type="text" placeholder="Awesome Input"></ion-input>
+        <ion-input type="text" placeholder="Awesome Input"></ion-input>
+        <ion-button (click)="nuevoItem()" expand="block" fill="solid" color="success" shape="round">
+          Borrar
+        </ion-button>
+      </ion-item>
+          </ion-list> <!-- OJO con los cierres-->
     <!-- ESTO LO PUSE PARA PODER ENTENDER EL PROBLEMA CON EL NUMERO QUE NO AUMENTABA
     <ion-text color="danger">
       <h3>ABAJO EL CARRITO: {{cantidadMyCesta}}</h3>
