@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- OJO, ESTO ES EL EDITOR  -->
+      <ion-title>La tiendita de los Herrores </ion-title>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-avatar slot="end">
+         <img class="imagenPLanta" src="../../assets/Carrito Editor.png" />
+      </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>ID: {{product.id}}</ion-label>
+    <ion-label position="floating">Imagen (URL)</ion-label>
+     <ion-input [(ngModel)]="product.imagen" type="string"></ion-input>
+
+    <ion-label position="floating">Nombre </ion-label>
+     <ion-input [(ngModel)]="product.nombre" type="string"></ion-input>
+   
+     <ion-label position="floating">Precio </ion-label>
+    <ion-input [(ngModel)]="product.precio" type="number"></ion-input>
+   
+    <ion-label position="floating">Stock </ion-label>
+    <ion-input [(ngModel)]="product.cantidad" type="number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="meteProducto()" expand="block" fill="solid" color="success" shape="round">
+      Agregar
+    </ion-button>
+    <ion-button (click)="modifProducto()" expand="block" fill="solid" color="dark" shape="round" [disabled]="product.id==null">
+      Modificar
+    </ion-button>
+    <ion-button (click)="borrarItem()" expand="block" fill="solid" color="danger" shape="round" [disabled]="product.id==null">
+      Borrar
+    </ion-button>
+  </ion-item>  
+</ion-content>

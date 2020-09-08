@@ -86,10 +86,15 @@
       en lugar de crear otro servicio define un public agregarCarrito() en productos.page.ts
       en mi código mantengo el nombre agregaaCesta() de cabezón que soy
 -->
-  <ion-button (click)="agregaaCesta()" expand="block" shape="round" [disabled]="product.cantidad==0">
+  <ion-item>
+    <ion-button (click)="agregaaCesta()" expand="block" shape="round" [disabled]="product.cantidad==0">
     <ion-icon slot="start" name="cart"></ion-icon>
-    Agregar a la cesta
-  </ion-button>
+      Agregar a la cesta
+    </ion-button>
+    <ion-button [routerLink]="['/editor-producto', product.id]" expand="block" fill="solid" color="danger" shape="round">
+      Editar Item en la Lista de Productos
+    </ion-button>
+  </ion-item>
 
 
 

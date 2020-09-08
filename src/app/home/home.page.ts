@@ -17,6 +17,8 @@ export class HomePage {
                         export class ProductoService {
                         private productos:Array<Producto> = <sigue .....> 
                     */
+  private nuevoProducto = new Producto();
+
   private cestaDeLaCompra: Array<Producto> = [];
   
   constructor(private prodSrv: ProductoService) { }
@@ -49,7 +51,10 @@ export class HomePage {
     this.productos = prodSrv.obtenerTodos();
   }
   */
- 
+  public meteProducto() {
+    this.prodSrv.addProducto(this.nuevoProducto).subscribe(nuevo => console.log(nuevo)); 
+  }
+  
   public sumaPrecios(): void {
     let pagar = this.prodSrv.getPrecioTotal();
    alert("Precio total a pagar es: $ " + pagar);

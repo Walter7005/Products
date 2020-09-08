@@ -15,7 +15,6 @@ const routes: Routes = [
       
     }
     ]
-    
   },
   {
     path: '',
@@ -25,6 +24,18 @@ const routes: Routes = [
   {
     path: 'productos',
     loadChildren: () => import('./productos/productos.module').then( m => m.ProductosPageModule)
+  },
+  {
+    path: 'editor-producto',
+    children: [{
+      path: "",
+      loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    },
+    {
+      path: ":id",
+      loadChildren: () => import('./editor-producto/editor-producto.module').then( m => m.EditorProductoPageModule)
+    }
+    ] // loadChildren: () => import('./editor-producto/editor-producto.module').then( m => m.EditorProductoPageModule)
   },
 ];
 

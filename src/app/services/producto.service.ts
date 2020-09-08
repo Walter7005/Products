@@ -78,12 +78,24 @@ export class ProductoService {
     // con los corchetes la pasamos vacía
     // hay que volver a productos.page.TS
   
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
+  
+  public updateProducto(producto: Producto) {
+    return this.httpClient.put("http://localhost:3000/productos/" + producto.id, producto)
+  }
+  
+  public borrarUno(producto: Producto) {
+    return this.httpClient.delete("http://localhost:3000/productos/" + producto.id)
+  }
 
   public obtenerTodos() {
     return this.httpClient.get<Producto[]>("http://localhost:3000/productos"); // fijate la coincidencia
   }
   
+  public addProducto(producto: Producto) {
+    return this.httpClient.post("http://localhost:3000/productos", producto);
+  }
+
   public obtenerPorID(id: string) {
     return this.httpClient.get<Producto>("http://localhost:3000/productos/" + id);
     /** eliminado el 2020SEP05 

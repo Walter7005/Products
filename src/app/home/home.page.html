@@ -44,20 +44,22 @@
         
         <ion-label *ngIf="prod.cantidad==0" color ="danger">SIN STOCK</ion-label>
         <ion-label *ngIf="prod.cantidad>0" color ="primary">Stock: {{prod.cantidad}} </ion-label>
-        <ion-button (click)="editarItem()" expand="block" fill="solid" shape="round">
-          Editar
-        </ion-button>
-        <ion-button (click)="borrarItem()" expand="block" fill="solid" color="danger" shape="round">
-          Borrar
-        </ion-button>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="Awesome Input"></ion-input>
-        <ion-input type="text" placeholder="Awesome Input"></ion-input>
-        <ion-input type="text" placeholder="Awesome Input"></ion-input>
-        <ion-input type="text" placeholder="Awesome Input"></ion-input>
-        <ion-button (click)="nuevoItem()" expand="block" fill="solid" color="success" shape="round">
-          Borrar
+<!--    <ion-label position="floating">Imagen (URL)</ion-label>
+         <ion-input [(ngModel)]="nuevoProducto.imagen" type="string"></ion-input>
+
+        <ion-label position="floating">Nombre </ion-label>
+         <ion-input [(ngModel)]="nuevoProducto.nombre" type="string"></ion-input>
+       
+         <ion-label position="floating">Precio </ion-label>
+        <ion-input [(ngModel)]="nuevoProducto.precio" type="number"></ion-input>
+       
+        <ion-label position="floating">Stock </ion-label>
+        <ion-input [(ngModel)]="nuevoProducto.cantidad" type="number"></ion-input>
+-->
+        <ion-button [routerLink]="['/editor-producto', 0]" expand="block" fill="solid" color="dark" shape="round">
+          Agregar
         </ion-button>
       </ion-item>
           </ion-list> <!-- OJO con los cierres-->
