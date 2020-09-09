@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductoService } from '../services/producto.service';
 import { Producto } from '../model/producto';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -21,16 +22,22 @@ export class HomePage {
 
   private cestaDeLaCompra: Array<Producto> = [];
   
-  constructor(private prodSrv: ProductoService) { }
+  constructor(private prodSrv: ProductoService, private alContrl:AlertController, private loading:LoadingController) { }
   
-  ngOnInit() {
+  public async ngOnInit() {
+
+    const loading = await this.loading.create();
+    loading.present();
+    
     // lo primero que hacemos es invocar el métdodo de obtenerTodos
     // eliminado el 2020SEP05 ... this.products = this.prodSrv.obtenerTodos();
     this.prodSrv.obtenerTodos().subscribe(datos => {
       this.products = datos;
+      loading.dismiss();
     });
     // me traigo el carrito que está guardado dentro de nuestro servicio     
     // y piso en el constructor
+    
     this.cestaDeLaCompra = this.prodSrv.cestaDeLaCompra;
     
   }       
@@ -55,9 +62,24 @@ export class HomePage {
     this.prodSrv.addProducto(this.nuevoProducto).subscribe(nuevo => console.log(nuevo)); 
   }
   
-  public sumaPrecios(): void {
+  public async sumaPrecios(): void {
+
     let pagar = this.prodSrv.getPrecioTotal();
-   alert("Precio total a pagar es: $ " + pagar);
+    let cuerpo = "";
+    for (let prod of this.prodSrv.cestaDeLaCompra) {
+      cuerpo = cuerpo + prod.nombre + ": " + prod.precio + " <br/>";
+    }
+  
+    const cuerpoAlerta = {
+      header: "Título",
+      subHeader: "subtítulo",
+      message: cuerpo+"Precio total " + pagar,
+      buttons: ["ok","Cancel"]
+    }
+    const alert = await this.alContrl.create(cuerpoAlerta);
+    await alert.present();
+    
+   
   }
 
 }
